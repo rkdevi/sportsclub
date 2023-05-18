@@ -1,0 +1,20 @@
+http=require('http');
+url=require('url');
+querystring = require('querystring');
+  function onRequest(req,res){
+     var path = url.parse(req.url).pathname;
+     console.log('Request for'+path+'received.');
+     var query =url.parse(req.url).query;
+     console.log(query);
+     var name = querystring.parse(query)["name"];
+     var email=querystring.parse(query)["email"];
+     var phone=querystring.parse(query)["phone"];
+     var address=querystring.parse(query)["address"];
+     var city=querystring.parse(query)['city'];
+    var state=querystring.parse(query)['state'];
+
+res.write('<h1>Your Name:</h1>'+name+'<h1>Email:</h1>'+email+'<h1>Phone no:</h1>'+phone+'<h1>Address:</h1>'+address+'<h1>City:</h1>'+city+'<h1>State:</h1>'+state+'<h1>has been registered successfully</h1>');
+     res.end();
+  }
+http.createServer(onRequest).listen(4000);
+console.log('Server has Started.......');
